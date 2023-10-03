@@ -1,3 +1,6 @@
+fn main() {
+}
+
 fn execute(_commands: &str) -> String {
     "0:0:N".to_string()
 }
