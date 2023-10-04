@@ -3,19 +3,19 @@ fn main() {
 
 fn execute(commands: &str) -> String {
     let mut y = 0;
+
+    let directions = ["N", "E", "S", "W"];
+    let mut direction_index: usize = 0;
     let mut direction = "N";
 
     for command in commands.chars() {
         if command == 'L' {
-            if direction == "N" {
-               direction = "W"
-            } else if direction == "W" {
-                direction = "S"
-            } else if direction == "S" {
-                direction = "E"
+            if direction_index > 0 {
+                direction_index -= 1;
             } else {
-                direction = "N"
+                direction_index = 3;
             }
+            direction = directions[direction_index];
         } else {
             y+=1;
         }
