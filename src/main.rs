@@ -9,8 +9,10 @@ fn execute(commands: &str) -> String {
         if command == 'L' {
             if direction == "N" {
                direction = "W"
-            } else {
+            } else if direction == "W" {
                 direction = "S"
+            } else {
+                direction = "E"
             }
         } else {
             y+=1;
@@ -58,5 +60,11 @@ mod tests {
     fn should_rotate_left_twice() {
         let result = execute("LL");
         assert_eq!(result, "0:0:S")
+    }
+
+    #[test]
+    fn should_rotate_left_thrice() {
+        let result = execute("LLL");
+        assert_eq!(result, "0:0:E")
     }
 }
