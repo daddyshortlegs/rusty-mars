@@ -23,6 +23,9 @@ fn execute(commands: &str) -> String {
                 }
             } else {
                 y += 1;
+                if y > 9 {
+                    y = 0;
+                }
             }
         }
     }
@@ -56,6 +59,12 @@ mod tests {
     fn should_move_north_thrice() {
         let result = execute("MMM");
         assert_eq!(result, "0:3:N")
+    }
+
+    #[test]
+    fn should_move_north_and_wrap_around() {
+        let result = execute("MMMMMMMMMM");
+        assert_eq!(result, "0:0:N")
     }
 
     #[test]
