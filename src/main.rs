@@ -3,12 +3,17 @@ fn main() {
 
 fn execute(commands: &str) -> String {
     let mut y = 0;
+    let mut direction = "N";
 
     for command in commands.chars() {
-        y+=1
+        if command == 'L' {
+            direction = "W"
+        } else {
+            y+=1;
+        }
     }
 
-    format!("0:{}:N", y)
+    format!("0:{}:{}", y, direction)
 }
 
 #[cfg(test)]
@@ -37,5 +42,11 @@ mod tests {
     fn should_move_north_thrice() {
         let result = execute("MMM");
         assert_eq!(result, "0:3:N")
+    }
+
+    #[test]
+    fn should_rotate_left() {
+        let result = execute("L");
+        assert_eq!(result, "0:0:W")
     }
 }
