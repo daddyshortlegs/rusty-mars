@@ -18,6 +18,9 @@ fn execute(commands: &str) -> String {
         } else {
             if compass.get_direction() == "E" {
                 x += 1;
+                if x > 9 {
+                    x = 0;
+                }
             } else {
                 y += 1;
             }
@@ -107,5 +110,17 @@ mod tests {
     fn should_move_east() {
         let result = execute("RM");
         assert_eq!(result, "1:0:E")
+    }
+
+    #[test]
+    fn should_move_east_twice() {
+        let result = execute("RMM");
+        assert_eq!(result, "2:0:E")
+    }
+
+    #[test]
+    fn should_move_east_and_wrap_around() {
+        let result = execute("RMMMMMMMMMM");
+        assert_eq!(result, "0:0:E")
     }
 }
