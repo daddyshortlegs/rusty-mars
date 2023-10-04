@@ -2,12 +2,13 @@ fn main() {
 }
 
 fn execute(commands: &str) -> String {
-    if commands == "MM" {
-        return "0:2:N".to_string()
-    } else if commands == "M" {
-        return "0:1:N".to_string()
+    let mut y = 0;
+
+    for command in commands.chars() {
+        y+=1
     }
-    "0:0:N".to_string()
+
+    format!("0:{}:N", y)
 }
 
 #[cfg(test)]
