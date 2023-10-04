@@ -27,6 +27,12 @@ fn execute(commands: &str) -> String {
                 } else {
                     y = 9;
                 }
+            } else if compass.get_direction() == "W" {
+                if x > 0 {
+                    x -= 1;
+                } else {
+                    x = 9;
+                }
             } else {
                 y += 1;
                 if y > 9 {
@@ -150,4 +156,23 @@ mod tests {
         let result = execute("RRMM");
         assert_eq!(result, "0:8:S")
     }
+
+    #[test]
+    fn should_move_west() {
+        let result = execute("LM");
+        assert_eq!(result, "9:0:W")
+    }
+
+    #[test]
+    fn should_move_west_twice() {
+        let result = execute("LMM");
+        assert_eq!(result, "8:0:W")
+    }
+
+    #[test]
+    fn should_move_around_grid() {
+        let result = execute("MMRMMLM");
+        assert_eq!(result, "2:3:N")
+    }
+
 }
