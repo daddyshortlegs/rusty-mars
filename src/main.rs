@@ -5,6 +5,7 @@ use crate::compass::Compass;
 fn main() {}
 
 fn execute(commands: &str) -> String {
+    let mut x = 0;
     let mut y = 0;
 
     let mut compass = Compass::new();
@@ -15,11 +16,15 @@ fn execute(commands: &str) -> String {
         } else if command == 'R' {
             compass.right();
         } else {
-            y += 1;
+            if compass.get_direction() == "E" {
+                x += 1;
+            } else {
+                y += 1;
+            }
         }
     }
 
-    format!("0:{}:{}", y, compass.get_direction())
+    format!("{}:{}:{}", x, y, compass.get_direction())
 }
 
 #[cfg(test)]
@@ -96,5 +101,11 @@ mod tests {
     fn should_rotate_right_back_to_start() {
         let result = execute("RRRR");
         assert_eq!(result, "0:0:N")
+    }
+
+    #[test]
+    fn should_move_east() {
+        let result = execute("RM");
+        assert_eq!(result, "1:0:E")
     }
 }
