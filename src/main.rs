@@ -32,4 +32,10 @@ mod tests {
         let result = execute("MM");
         assert_eq!(result, "0:2:N")
     }
+
+    #[test]
+    fn should_move_north_thrice() {
+        let result = execute("MMM");
+        assert_eq!(result, "0:3:N")
+    }
 }
