@@ -1,5 +1,4 @@
-fn main() {
-}
+fn main() {}
 
 fn execute(commands: &str) -> String {
     let mut y = 0;
@@ -16,8 +15,14 @@ fn execute(commands: &str) -> String {
                 direction_index = 3;
             }
             direction = directions[direction_index];
+        } else if command == 'R' {
+            direction_index += 1;
+            if direction_index > 3 {
+                direction_index = 0;
+            }
+            direction = directions[direction_index];
         } else {
-            y+=1;
+            y += 1;
         }
     }
 
@@ -73,6 +78,30 @@ mod tests {
     #[test]
     fn should_rotate_left_back_to_start() {
         let result = execute("LLLL");
+        assert_eq!(result, "0:0:N")
+    }
+
+    #[test]
+    fn should_rotate_right() {
+        let result = execute("R");
+        assert_eq!(result, "0:0:E")
+    }
+
+    #[test]
+    fn should_rotate_right_twice() {
+        let result = execute("RR");
+        assert_eq!(result, "0:0:S")
+    }
+
+    #[test]
+    fn should_rotate_right_thrice() {
+        let result = execute("RRR");
+        assert_eq!(result, "0:0:W")
+    }
+
+    #[test]
+    fn should_rotate_right_back_to_start() {
+        let result = execute("RRRR");
         assert_eq!(result, "0:0:N")
     }
 }
