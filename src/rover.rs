@@ -1,18 +1,17 @@
 use crate::compass::Compass;
+use crate::grid::Grid;
 
-struct Coordinate {
-    x: i32,
-    y: i32
-}
 
 pub struct Rover {
-    coordinate: Coordinate,
-    compass: Compass
+    compass: Compass,
+    grid: Grid
 }
+
+
 
 impl Rover {
     pub fn new() -> Rover {
-        Rover{coordinate:Coordinate { x: 0, y: 0 }, compass: Compass::new()}
+        Rover{compass: Compass::new(), grid: Grid::new()}
     }
 
     pub fn turn_left(&mut self) {
@@ -25,31 +24,17 @@ impl Rover {
 
     pub fn forward(&mut self) {
         if self.compass.get_direction() == "E" {
-            self.coordinate.x += 1;
-            if self.coordinate.x > 9 {
-                self.coordinate.x = 0;
-            }
+            self.grid.east();
         } else if self.compass.get_direction() == "S" {
-            if self.coordinate.y > 0 {
-                self.coordinate.y -= 1;
-            } else {
-                self.coordinate.y = 9;
-            }
+            self.grid.south();
         } else if self.compass.get_direction() == "W" {
-            if self.coordinate.x > 0 {
-                self.coordinate.x -= 1;
-            } else {
-                self.coordinate.x = 9;
-            }
+            self.grid.west();
         } else {
-            self.coordinate.y += 1;
-            if self.coordinate.y > 9 {
-                self.coordinate.y = 0;
-            }
+            self.grid.north();
         }
     }
 
     pub fn location(&mut self) -> String {
-        format!("{}:{}:{}", self.coordinate.x, self.coordinate.y, self.compass.get_direction())
+        format!("{}:{}", self.grid.position(), self.compass.get_direction())
     }
 }

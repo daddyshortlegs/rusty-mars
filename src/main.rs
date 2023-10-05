@@ -1,5 +1,6 @@
 mod compass;
 mod rover;
+mod grid;
 
 use crate::rover::Rover;
 
