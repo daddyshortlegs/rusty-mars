@@ -7,8 +7,6 @@ pub struct Rover {
     grid: Grid
 }
 
-
-
 impl Rover {
     pub fn new() -> Rover {
         Rover{compass: Compass::new(), grid: Grid::new()}

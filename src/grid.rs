@@ -16,7 +16,7 @@ impl Grid{
 
     pub fn east(&mut self) {
         self.coordinate.x += 1;
-        if self.coordinate.x > 9 {
+        if self.coordinate.x >= self.width {
             self.coordinate.x = 0;
         }
     }
@@ -25,7 +25,7 @@ impl Grid{
         if self.coordinate.y > 0 {
             self.coordinate.y -= 1;
         } else {
-            self.coordinate.y = 9;
+            self.coordinate.y = self.height - 1;
         }
     }
 
@@ -33,13 +33,13 @@ impl Grid{
         if self.coordinate.x > 0 {
             self.coordinate.x -= 1;
         } else {
-            self.coordinate.x = 9;
+            self.coordinate.x = self.height - 1;
         }
     }
 
     pub fn north(&mut self) {
         self.coordinate.y += 1;
-        if self.coordinate.y > 9 {
+        if self.coordinate.y >= self.height {
             self.coordinate.y = 0;
         }
     }
