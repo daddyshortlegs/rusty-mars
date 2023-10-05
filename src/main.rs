@@ -3,8 +3,15 @@ mod rover;
 mod grid;
 
 use crate::rover::Rover;
+use warp::Filter;
 
-fn main() {}
+#[tokio::main]
+async fn main() {
+    let rover = warp::path!("execute" / String)
+        .map(|commands: String| format!("Rover now at, {}!", execute(commands.as_str())));
+
+    warp::serve(rover).run(([127, 0, 0, 1], 8080)).await;
+}
 
 fn execute(commands: &str) -> String {
     let mut rover = Rover::new();
