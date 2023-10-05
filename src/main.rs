@@ -1,48 +1,24 @@
 mod compass;
+mod rover;
 
-use crate::compass::Compass;
+use crate::rover::Rover;
 
 fn main() {}
 
 fn execute(commands: &str) -> String {
-    let mut x = 0;
-    let mut y = 0;
-
-    let mut compass = Compass::new();
+    let mut rover = Rover::new();
 
     for command in commands.chars() {
         if command == 'L' {
-            compass.left();
+            rover.turn_left();
         } else if command == 'R' {
-            compass.right();
+            rover.turn_right();
         } else {
-            if compass.get_direction() == "E" {
-                x += 1;
-                if x > 9 {
-                    x = 0;
-                }
-            } else if compass.get_direction() == "S" {
-                if y > 0 {
-                    y -= 1;
-                } else {
-                    y = 9;
-                }
-            } else if compass.get_direction() == "W" {
-                if x > 0 {
-                    x -= 1;
-                } else {
-                    x = 9;
-                }
-            } else {
-                y += 1;
-                if y > 9 {
-                    y = 0;
-                }
-            }
+            rover.forward();
         }
     }
 
-    format!("{}:{}:{}", x, y, compass.get_direction())
+    rover.location()
 }
 
 #[cfg(test)]
